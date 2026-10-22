@@ -11,6 +11,9 @@ public class Escribirjson {
     static File peli=new File(recursos+"/Pelis.json");
 
     public static void main(String[] args) {
+        if(peli.exists()){
+            peli.delete();
+        }
         //Creamos las diferentes peliculas que se van a almacenar en al json
         Pelicula p1=new Pelicula();
         p1.setTitulo("Matrix");
@@ -33,7 +36,8 @@ public class Escribirjson {
         Gson gson=new GsonBuilder().setPrettyPrinting().create();
         //Acontinuacion voy a meter las diferentes pelicualas que he creado
         try(FileWriter fichero=new FileWriter(peli)){
-        //Aqui vamos a llamar al metodo .toJson para que pase todo el array de peliculas y lo escriba en json en el fichero que le hemos pasado
+        //Aqui vamos a llamar al metodo .toJson para que pase todo el array de
+            // peliculas y lo escriba en json en el fichero que le hemos pasado
         gson.toJson(pelis,fichero);
             System.out.println("Documento creado con exito");
         }catch (IOException e) {
